@@ -1,5 +1,17 @@
 <template>
   <div class="home">
-    <h1>Home View</h1>
+    <RequestKitForm />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import RequestKitForm from "@/components/RequestKitForm.vue";
+
+export default {
+  name: "home",
+  components: {
+    RequestKitForm
+  }
+};
+</script>
