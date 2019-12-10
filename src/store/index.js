@@ -8,6 +8,7 @@ export default new Vuex.Store({
     kits: {
       SIAC: {
         name: "SIAC",
+        tabIcon: "mdi-cart-outline",
         apps: [
           {
             name: "Retaguarda",
@@ -45,6 +46,7 @@ export default new Vuex.Store({
       },
       CARDAPIO: {
         name: "CARDAPIO",
+        tabIcon: "mdi-silverware-fork-knife",
         apps: [
           {
             name: "Retaguarda",
@@ -68,9 +70,51 @@ export default new Vuex.Store({
           }
         ]
       }
+    },
+    selectedApps: {}
+  },
+  getters: {
+    selectedApps: state => {
+      return state.selectedApps;
+    },
+    kits: state => {
+      return state.kits;
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    updateSelectedApps(state, { apps, kit }) {
+      for (const app in apps) {
+        state.selectedApps[kit][app].selected = apps[app];
+      }
+    },
+    loadSelectedApps(state, { apps, kit }) {
+      state.selectedApps = Object.assign({}, state.selectedApps, {
+        [kit]: apps
+      });
+    },
+    updateSelectedAppsVersion(state, { apps, kit }) {
+      for (const app in apps) {
+        state.selectedApps[kit][app].version = apps[app];
+      }
+    }
+  },
+  actions: {
+    setSelectedApp({ commit }, payload) {
+      commit("updateSelectedApps", payload);
+    },
+    setSelectedAppVersion({ commit }, payload) {
+      commit("updateSelectedAppsVersion", payload);
+    },
+    // eslint-disable-next-line no-unused-vars
+    loadSelectedAppsObj({ commit }, kit) {
+      let payload = {};
+
+      for (const { name } of kit.apps) {
+        payload[name] = { name, version: "", selected: false };
+        // payload[name] = {};
+      }
+      commit("loadSelectedApps", { kit: kit.name, apps: payload });
+    }
+  },
   modules: {}
 });

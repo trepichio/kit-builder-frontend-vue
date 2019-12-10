@@ -27,7 +27,7 @@
               <v-flex xs1>
                 <v-img
                   src="../assets/images/Sistemasicone-trans.fw_.png"
-                  class="my-3"
+                  class="mb-5"
                   contain
                   height="100"
                 ></v-img>
@@ -35,45 +35,12 @@
               <v-toolbar-title>Escolha o sistema</v-toolbar-title>
             </v-toolbar>
             <v-tabs vertical slider-size="10" slider-color="blue">
-              <v-tab> <v-icon left>mdi-cart-outline</v-icon>SIAC</v-tab>
-              <v-tab>
-                <v-icon left>mdi-silverware-fork-knife</v-icon>CARDAPIO
-              </v-tab>
-
-              <v-tab-item>
-                <v-card flat>
-                  <v-card-text>
-                    <p>
-                      Formulario do SIAC
-                    </p>
-
-                    <p class="mb-0">
-                      Cras sagittis. Phasellus nec sem in justo pellentesque
-                      facilisis. Proin sapien ipsum, porta a, auctor quis,
-                      euismod ut, mi. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nam at tortor in
-                      tellus interdum sagittis.
-                    </p>
-                  </v-card-text>
-                </v-card>
-              </v-tab-item>
-
-              <v-tab-item>
-                <v-card flat>
-                  <v-card-text>
-                    <p>
-                      Formulario do Cardapio
-                    </p>
-
-                    <p class="mb-0">
-                      Cras sagittis. Phasellus nec sem in justo pellentesque
-                      facilisis. Proin sapien ipsum, porta a, auctor quis,
-                      euismod ut, mi. Donec quam felis, ultricies nec,
-                      pellentesque eu, pretium quis, sem. Nam at tortor in
-                      tellus interdum sagittis.
-                    </p>
-                  </v-card-text>
-                </v-card>
+              <v-tab v-for="kit in kits" :key="kit.name">
+                <v-icon left>{{ kit.tabIcon }}</v-icon
+                >{{ kit.name }}</v-tab
+              >
+              <v-tab-item v-for="kit in kits" :key="kit.name">
+                <TabKit :kit="kit"></TabKit>
               </v-tab-item>
             </v-tabs>
           </v-card>
@@ -84,8 +51,20 @@
 </template>
 
 <script>
+import TabKit from "@/components/TabKit.vue";
+
 export default {
   name: "RequestKitForm",
-  components: {}
+  components: {
+    TabKit
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    kits() {
+      return this.$store.state.kits;
+    }
+  }
 };
 </script>
