@@ -29,9 +29,9 @@
           </template>
           <v-text-field
             v-model="installPath"
-            :rules="nameRules"
+            :rules="installPathRules"
             label="Caminho da instalação"
-            placeholder="C:\"
+            :placeholder="installPathDefault"
             outlined
             clearable
             hint="Indique o caminho onde irá descompactar/instalar o Kit. Deixe em branco para utilizar o padrão."
@@ -304,8 +304,85 @@ export default {
     descriptionLimit: 60,
     entries: [],
     isLoading: false,
-    model: null,
-    search: null
+    customerInfo: null,
+    search: null,
+    valid: null,
+    CNPJ: "",
+    razaoSocial: "",
+    fantasia: "",
+    ie: "",
+    endereco: "",
+    numero: "",
+    complemento: "",
+    bairro: "",
+    cidade: "",
+    uf: "",
+    IBGE: "",
+    cep: "",
+    telefone: "",
+    fax: "",
+    contato: "",
+    suframa: "",
+    im: "",
+    email1: "",
+    email2: "",
+    email3: "",
+    site: "",
+    serie_certificado: "",
+    ie_tipo: "",
+    estados: [
+      { value: "AC", text: "AC - Acre" },
+      { value: "AL", text: "AL - Alagoas" },
+      { value: "AP", text: "AP - Amapá" },
+      { value: "AM", text: "AM - Amazonas" },
+      { value: "BA", text: "BA - Bahia" },
+      { value: "CE", text: "CE - Ceará" },
+      { value: "DF", text: "DF - Distrito Federal" },
+      { value: "ES", text: "ES - Espírito Santo" },
+      { value: "GO", text: "GO - Goiás" },
+      { value: "MA", text: "MA - Maranhão" },
+      { value: "MT", text: "MT - Mato Grosso" },
+      { value: "MS", text: "MS - Mato Grosso do Sul" },
+      { value: "MG", text: "MG - Minas Gerais" },
+      { value: "PA", text: "PA - Pará" },
+      { value: "PB", text: "PB - Paraíba" },
+      { value: "PR", text: "PR - Paraná" },
+      { value: "PE", text: "PE - Pernambuco" },
+      { value: "PI", text: "PI - Piauí" },
+      { value: "RJ", text: "RJ - Rio de Janeiro" },
+      { value: "RN", text: "RN - Rio Grande do Norte" },
+      { value: "RS", text: "RS - Rio Grande do Sul" },
+      { value: "RO", text: "RO - Rondônia" },
+      { value: "RR", text: "RR - Roraima" },
+      { value: "SC", text: "SC - Santa Catarina" },
+      { value: "SP", text: "SP - São Paulo" },
+      { value: "SE", text: "SE - Sergipe" },
+      { value: "TO", text: "TO - Tocantins" }
+    ],
+    installPathRules: [
+      value =>
+        value.match(
+          /^[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$/g
+        ) ||
+        value === "" ||
+        "Not a valid path"
+    ],
+    hostnameRules: [
+      value =>
+        value.match(
+          /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$/g
+        ) ||
+        value === "" ||
+        "Not a valid Hostname"
+    ],
+    ipRules: [
+      value =>
+        value.match(
+          /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/g
+        ) ||
+        value === "" ||
+        "Not a valid IP"
+    ]
   }),
   computed: {
     selectedApps() {
