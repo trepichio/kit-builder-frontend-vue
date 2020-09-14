@@ -621,12 +621,14 @@ export default {
     },
     items() {
       return this.entries.map(entry => {
-        const Description =
-          entry.Description.length > this.descriptionLimit
-            ? entry.Description.slice(0, this.descriptionLimit) + "..."
-            : entry.Description;
+        entry.Descricao = `${entry.CNPJ} - ${entry["RAZAO SOCIAL"]}`;
 
-        return Object.assign({}, entry, { Description });
+        const Descricao =
+          entry.Descricao.length > this.descriptionLimit
+            ? entry.Descricao.slice(0, this.descriptionLimit) + "..."
+            : entry.Descricao;
+
+        return Object.assign({}, entry, { Descricao });
       });
     }
   },
