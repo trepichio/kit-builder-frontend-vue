@@ -376,13 +376,12 @@
                 color="white"
                 hide-no-data
                 hide-selected
-                item-text="Description"
-                item-value="CNPJ"
+                item-text="Descricao"
                 label="Clientes cadastrados"
                 placeholder="Começe a digitar um CNPJ para buscar"
                 prepend-icon="mdi-database-search"
                 return-object
-                hint="Insira um CNPJ válido. Será verificado a existência na nossa base de dados."
+                hint="Insira um CNPJ válido ou a Razão Social. Será verificado a existência na nossa base de dados."
               ></v-autocomplete>
             </v-card-text>
             <v-divider></v-divider>
