@@ -577,7 +577,22 @@ export default {
     },
     sortedVersions() {
       let sorted = {};
-      for (const { name, versions } of this.kit.apps) {
+      const kv = this.selectedKitVersion;
+      console.log("TCL: sortedVersions -> kv", kv);
+      const pattern = /\d+\.\d+\.\d+/g;
+      const found = this.selectedKitVersion.match(pattern);
+      console.log("TCL: sortedVersions -> found", found);
+
+      const apps = this.kit.apps.map(({ name, versions }) => ({
+        name,
+        versions: versions.filter(
+          v => v.match(new RegExp(`^${found}`, "g"))
+          // v.match(new RegExp(`^${this.selectedKitVersion}`,'g'))
+        )
+      }));
+      console.log("TCL: sortedVersions -> apps", apps);
+
+      for (const { name, versions } of apps) {
         sorted[name] = versions;
         sorted[name].sort(this.$compareVersions).reverse();
       }
