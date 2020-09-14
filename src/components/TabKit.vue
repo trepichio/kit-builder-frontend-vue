@@ -269,6 +269,7 @@ export default {
   data: () => ({
     selectedAppName: {},
     selectedAppVersion: {},
+    selectedValidas: [],
     // selectedApps: {
     //   Retaguarda: {
     //     name: "Retaguarda",
@@ -293,9 +294,12 @@ export default {
     // },
     showCNPJ: false,
     selectedEquips: [],
+    selectedKitVersion: "0.0.0.0",
     equipamentos: ["Bematech", "Epson", "Argox"],
     installPath: "",
-    iporhost: "",
+    installPathDefault: "C:\\MBD",
+    hostname: "",
+    ip: "",
     local: true,
     descriptionLimit: 60,
     entries: [],
