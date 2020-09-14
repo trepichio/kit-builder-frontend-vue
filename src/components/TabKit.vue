@@ -419,7 +419,7 @@
             color="success"
             class="mr-4"
             @click="validate"
-            >Baixar Kit</v-btn
+            >Gerar Kit</v-btn
           >
 
           <v-btn :disabled="!valid" color="blue" class="mr-4" @click="validate"
