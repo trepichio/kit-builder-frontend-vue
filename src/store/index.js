@@ -284,6 +284,59 @@ export default new Vuex.Store({
         // payload[name] = {};
       }
       commit("loadSelectedApps", { kit: kit.name, apps: payload });
+    },
+    sendKitRequest({ getters }, payload) {
+      const apps = Object.values(getters.selectedApps[payload.kitName]);
+      console.log("TCL: sendKitRequest -> apps", apps);
+
+      const selectedApps = apps
+        .filter(app => app.selected === true)
+        .map(({ name, version }) => ({ name, version }));
+      console.log("TCL: sendKitRequest -> selectedApps", selectedApps);
+      // let kitPayload = JSON.stringify(payload);
+
+      const credentials = {
+        email: "trepichio@gmail.com",
+        password: "123456"
+      };
+
+      const doKit = {
+        credentials,
+        payload: { kitPrograms: selectedApps, ...payload }
+      };
+      console.log("TCL: sendKitRequest -> doKit", JSON.stringify(doKit));
+
+      fetch("http://localhost:5000/api/kit/client", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+          // eslint-disable-next-line prettier/prettier
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost",
+          "Access-Control-Allow-Methods": "POST"
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(doKit)
+      })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return res.json();
+        })
+        .then(json => {
+          alert(json.message);
+        })
+        .catch(error => {
+          alert(
+            `There has been a problem with your fetch operation:  ${error}`
+          );
+        });
+    },
+    setSelectedKitVersion({ commit }, payload) {
+      commit("updateSelectedKitVersion", payload);
     }
   },
   modules: {}
