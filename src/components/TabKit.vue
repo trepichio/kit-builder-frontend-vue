@@ -371,8 +371,91 @@ export default {
         }
       });
     },
-    whatIsMyIP() {
-      this.iporhost = "ip_teste";
+    async whatIsMyIP() {
+      const ipv4 = await this.$getIPv4();
+      console.log("TCL: whatIsMyIP -> ipv4", ipv4);
+      if ((!ipv4 || ipv4 === "") && this.$browserDetect.isChrome)
+        this.ip =
+          "Acesse chrome://flags/#enable-webrtc-hide-local-ips-with-mdns E DESABILITE!";
+      else this.ip = ipv4;
+    },
+    validate() {
+      if (this.$refs["form-" + this.kit.name].validate()) {
+        this.valid = true;
+        const iPath =
+          this.installPath === "" ? this.installPathDefault : this.installPath;
+
+        // eslint-disable-next-line no-unused-vars
+        const [fullPath, driverLetter, path] = iPath.match(
+          /(^[A-Za-z]:)\\((?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$)/
+        );
+
+        let doKit = {};
+
+        if (this.searchCNPJ) {
+          doKit = {
+            CNPJ: this.customerInfo.CNPJ,
+            kitVersion: this.selectedKitVersion,
+            kitName: this.kit.name,
+            customerName: this.customerInfo["RAZAO SOCIAL"],
+            rootDir: path,
+            driverLetter: driverLetter,
+            server: this.hostname !== "" ? this.hostname : this.ip,
+            CustomerRegistration: this.customerInfo,
+            validas: this.selectedValidas
+            // test: true
+          };
+        } else {
+          doKit = {
+            CNPJ: this.CNPJ,
+            kitVersion: this.selectedKitVersion,
+            kitName: this.kit.name,
+            customerName: this.razaoSocial,
+            rootDir: path,
+            driverLetter: driverLetter,
+            server:
+              !this.iporhost || this.iporhost === ""
+                ? "127.0.0.1"
+                : this.iporhost,
+            CustomerRegistration: {
+              CNPJ: this.CNPJ,
+              ["RAZAO SOCIAL"]: this.razaoSocial,
+              CONTATO: this.contato,
+              FANTASIA: this.fantasia,
+              IE: this.ie,
+              ENDERECO: this.endereco,
+              N: this.numero,
+              COMPLEMENTO: this.complemento,
+              BAIRRO: this.bairro,
+              CIDADE: this.cidade,
+              UF: this.uf,
+              CEP: this.cep,
+              TELEFONE: this.telefone,
+              FAX: this.fax,
+              IBGE: this.IBGE,
+              IE_TIPO: this.ie_tipo,
+              SUFRAMA: this.suframa,
+              IM: this.im,
+              EMAIL1: this.email1,
+              EMAIL2: this.email2,
+              EMAIL3: this.email3,
+              SITE: this.site,
+              SERIE_CERTIFICADO: this.serie_certificado,
+              Descricao: this.CNPJ + " - " + this["RAZAO SOCIAL"]
+            },
+            validas: this.selectedValidas
+            // test: true
+          };
+        }
+
+        this.$store.dispatch("sendKitRequest", doKit);
+      }
+    },
+    reset() {
+      this.$refs["form-" + this.kit.name].reset();
+    },
+    resetValidation() {
+      this.$refs["form-" + this.kit.name].resetValidation();
     }
   },
   watch: {
