@@ -56,20 +56,43 @@
           </template>
 
           <v-radio-group v-model="local" row>
-            <v-radio label="Servidor" :value="true"></v-radio>
-            <v-radio label="Terminal" :value="false"></v-radio>
+            <v-radio label="Hostname" :value="true"></v-radio>
+            <v-radio label="IP" :value="false"></v-radio>
           </v-radio-group>
 
           <v-text-field
-            v-if="!local"
-            v-model="iporhost"
-            label="Ip ou Hostname da máquina Servidor"
+            v-if="local"
+            v-model="hostname"
+            label="Hostname da máquina Servidor"
             outlined
             clearable
-            hint="Insira um IP ou Hostname válido. Será utilizado para parametrizar o Kit."
-            append-icon="mdi-ip"
-            @click:append="whatIsMyIP"
-          ></v-text-field>
+            hint="Insira um Hostname válido. Será utilizado para parametrizar o Kit."
+            :rules="hostnameRules"
+            :hide-details="!local"
+          >
+          </v-text-field>
+
+          <v-text-field
+            v-if="!local"
+            v-model="ip"
+            label="Ip da máquina Servidor"
+            outlined
+            clearable
+            hint="Insira um IP válido. Será utilizado para parametrizar o Kit."
+            :rules="ipRules"
+            placeholder="127.0.0.1"
+            :autofocus="!local"
+          >
+            <template v-slot:append>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon @click="whatIsMyIP" v-on="on">mdi-ip</v-icon>
+                </template>
+                No Chrome, talvez precise DESABILITAR a flag em
+                chrome://flags/#enable-webrtc-hide-local-ips-with-mdns
+              </v-tooltip>
+            </template>
+          </v-text-field>
 
           <v-container fluid>
             <v-row align="center" v-for="{ name } in kit.apps" :key="name">
