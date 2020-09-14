@@ -102,6 +102,7 @@
                   inset
                   :label="name"
                   @change="setLatest(name)"
+                  :disabled="selectedKitVersion === '0.0.0.0'"
                 ></v-switch>
               </v-col>
               <v-col cols="12" sm="6">
