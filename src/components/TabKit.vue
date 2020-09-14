@@ -7,6 +7,26 @@
           v-model="valid"
           :lazy-validation="lazy"
         >
+          <template>
+            <v-container fluid>
+              <v-row align="center">
+                <v-col cols="5">
+                  <v-subheader>Versão do Banco de Dados: </v-subheader>
+                </v-col>
+                <v-col cols="7">
+                  <v-select
+                    v-model="selectedKitVersion"
+                    :items="sortedKitVersions"
+                    append-outer-icon="mdi-database"
+                    menu-props="auto"
+                    hide-details
+                    label="Selecione"
+                    single-line
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
           <v-text-field
             v-model="installPath"
             :rules="nameRules"
