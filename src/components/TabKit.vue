@@ -177,7 +177,7 @@
             </v-select>
           </v-container>
 
-          <v-radio-group v-model="showCNPJ" row>
+          <v-radio-group v-model="searchCNPJ" row>
             <v-radio
               label="Sem informações do Cliente"
               :value="false"
@@ -185,7 +185,178 @@
             <v-radio label="Com informações do Cliente" :value="true"></v-radio>
           </v-radio-group>
 
-          <v-card color="blue darken-1 mb-4" dark v-if="showCNPJ === true">
+          <v-card color="blue darken-1 mb-4" dark v-if="!searchCNPJ">
+            <v-card-title class="headline orange lighten-1">
+              Entrada de dados do Cliente
+            </v-card-title>
+            <v-card-text>
+              Insira manualmente os dados para o cadastro da empresa nos
+              sistemas a implantar
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-col cols="12" class="light-blue lighten-3">
+              <v-row align="center">
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="CNPJ"
+                    :counter="20"
+                    :rules="cnpjRules"
+                    label="CNPJ"
+                    required
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="razaoSocial"
+                    :counter="60"
+                    :rules="razaoSocialRules"
+                    label="Razão Social"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="fantasia"
+                    :counter="60"
+                    :rules="fantasiaRules"
+                    label="Fantasia"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="ie"
+                    :counter="14"
+                    :rules="ieRules"
+                    label="I.E."
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col cols="2">
+                  <v-text-field
+                    v-model="cep"
+                    :rules="cepRules"
+                    label="CEP"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                  <v-select
+                    v-model="uf"
+                    :items="estados"
+                    :rules="[v => !!v || 'UF is required']"
+                    label="UF"
+                    required
+                  ></v-select>
+                </v-col>
+                <v-col cols="4">
+                  <v-text-field
+                    v-model="IBGE"
+                    :rules="ibgeRules"
+                    label="IBGE"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4">
+                  <v-text-field
+                    v-model="cidade"
+                    :counter="60"
+                    :rules="cidadeRules"
+                    label="Cidade"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row align="center">
+                <v-col cols="10">
+                  <v-text-field
+                    v-model="endereco"
+                    :counter="60"
+                    :rules="enderecoRules"
+                    label="Endereço"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                  <v-text-field
+                    v-model="numero"
+                    :counter="5"
+                    :rules="numeroRules"
+                    label="Número"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="complemento"
+                    :counter="22"
+                    :rules="complementoRules"
+                    label="Complemento"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="bairro"
+                    :counter="60"
+                    :rules="bairroRules"
+                    label="Bairro"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="telefone"
+                    :counter="12"
+                    :rules="telefoneRules"
+                    label="Telefone"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="fax"
+                    :counter="10"
+                    :rules="telefoneRules"
+                    label="FAX"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row align="center">
+                <v-col cols="4">
+                  <v-text-field
+                    v-model="contato"
+                    :counter="28"
+                    :rules="contatoRules"
+                    label="Contato"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="8">
+                  <v-text-field
+                    v-model="email"
+                    :counter="60"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-card>
+
+          <v-card color="blue darken-1 mb-4" dark v-else>
             <v-card-title class="headline orange lighten-1">
               Busca por CNPJ
             </v-card-title>
@@ -292,7 +463,7 @@ export default {
     //     selected: false
     //   }
     // },
-    showCNPJ: false,
+    searchCNPJ: false,
     selectedEquips: [],
     selectedKitVersion: "0.0.0.0",
     equipamentos: ["Bematech", "Epson", "Argox"],
