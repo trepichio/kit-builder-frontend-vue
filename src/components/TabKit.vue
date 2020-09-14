@@ -38,6 +38,23 @@
             append-icon="mdi-folder"
           ></v-text-field>
 
+          <template>
+            <v-container fluid>
+              <v-row justify="space-around">
+                <v-checkbox
+                  v-model="selectedValidas"
+                  label="Vai emitir NFe? (VALIDAXML3)"
+                  value="VALIDAXML3"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="selectedValidas"
+                  label="Vai emitir Manifesto? (ValidaMDFe)"
+                  value="ValidaMDFe"
+                ></v-checkbox>
+              </v-row>
+            </v-container>
+          </template>
+
           <v-radio-group v-model="local" row>
             <v-radio label="Servidor" :value="true"></v-radio>
             <v-radio label="Terminal" :value="false"></v-radio>
