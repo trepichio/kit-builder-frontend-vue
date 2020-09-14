@@ -179,10 +179,13 @@
 
           <v-radio-group v-model="searchCNPJ" row>
             <v-radio
-              label="Sem informações do Cliente"
+              label="Entrada manual das informações do Cliente"
               :value="false"
             ></v-radio>
-            <v-radio label="Com informações do Cliente" :value="true"></v-radio>
+            <v-radio
+              label="Busca das informações do Cliente"
+              :value="true"
+            ></v-radio>
           </v-radio-group>
 
           <v-card color="blue darken-1 mb-4" dark v-if="!searchCNPJ">
