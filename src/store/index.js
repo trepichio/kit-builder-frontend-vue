@@ -249,9 +249,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updateSelectedApps(state, { apps, kit }) {
+    updateSelectedApps(state, { apps, kitName }) {
       for (const app in apps) {
-        state.selectedApps[kit][app].selected = apps[app];
+        state.selectedApps[kitName][app].selected = apps[app];
       }
     },
     loadSelectedApps(state, { apps, kit }) {
@@ -259,9 +259,9 @@ export default new Vuex.Store({
         [kit]: apps
       });
     },
-    updateSelectedAppsVersion(state, { apps, kit }) {
+    updateSelectedAppsVersion(state, { apps, kitName }) {
       for (const app in apps) {
-        state.selectedApps[kit][app].version = apps[app];
+        state.selectedApps[kitName][app].version = apps[app];
       }
     },
     updateSelectedKitVersion(state, { kitVersion, kitName }) {
