@@ -311,6 +311,16 @@ export default {
     selectedApps() {
       return this.$store.getters.selectedApps[this.kit.name];
     },
+    sortedKitVersions() {
+      const kitVersions = this.kit.kitVersions.map(v =>
+        this.$semver.valid(this.$semver.coerce(v, true))
+      );
+      console.log("TCL: sortedKitVersions -> kitVersions", kitVersions);
+      let sorted = {};
+      sorted = kitVersions.sort(this.$compareVersions).reverse();
+      // return kitVersions;
+      return sorted;
+    },
     sortedVersions() {
       let sorted = {};
       for (const { name, versions } of this.kit.apps) {
