@@ -366,7 +366,7 @@
             </v-card-text>
             <v-card-text>
               <v-autocomplete
-                v-model="model"
+                v-model="customerInfo"
                 :items="items"
                 :loading="isLoading"
                 :search-input.sync="search"
@@ -384,7 +384,11 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-expand-transition>
-              <v-list v-if="model" align="justify" class="light-blue lighten-3">
+              <v-list
+                v-if="customerInfo"
+                align="justify"
+                class="light-blue lighten-3"
+              >
                 <v-list-item v-for="(field, i) in fields" :key="i">
                   <v-list-item-content>
                     <v-list-item-title v-text="field.value"></v-list-item-title>
@@ -398,9 +402,9 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                :disabled="!model"
+                :disabled="!customerInfo"
                 color="grey darken-3"
-                @click="model = null"
+                @click="customerInfo = null"
               >
                 Limpar
                 <v-icon right>mdi-close-circle</v-icon>
@@ -589,12 +593,12 @@ export default {
       return "mdi-checkbox-blank-outline";
     },
     fields() {
-      if (!this.model) return [];
+      if (!this.customerInfo) return [];
 
-      return Object.keys(this.model).map(key => {
+      return Object.keys(this.customerInfo).map(key => {
         return {
           key,
-          value: this.model[key] || "n/a"
+          value: this.customerInfo[key] || "n/a"
         };
       });
     },
