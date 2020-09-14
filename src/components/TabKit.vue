@@ -757,7 +757,7 @@ export default {
 
       // Lazily load input items
       // fetch("https://api.publicapis.org/entries")
-      fetch("http://192.168.87.131:3000/entries")
+      fetch("http://localhost:3000/entries")
         .then(res => res.json())
         .then(res => {
           // const { count, entries } = res;
