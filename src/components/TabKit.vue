@@ -790,6 +790,54 @@ export default {
         });
       },
       deep: true
+    },
+    selectedKitVersion: {
+      handler(value) {
+        this.$store.dispatch("setSelectedKitVersion", {
+          kitVersion: value,
+          kitName: this.kit.name
+        });
+        this.selectedAppName = {};
+        this.selectedAppVersion = {};
+        this.$store.dispatch("loadSelectedAppsObj", this.kit);
+        return value;
+      },
+      deep: true
+    },
+    cep(value) {
+      //Nova variável "cep" somente com dígitos.
+      const cep = value.replace(/\D/g, "");
+
+      //Verifica se campo cep possui valor informado.
+      if (cep !== "" && cep.length === 8) {
+        //Expressão regular para validar o CEP.
+        const validacep = /^[0-9]{8}$/;
+
+        //Valida o formato do CEP.
+        if (validacep.test(cep)) {
+          this.$viaCep.buscarCep(value).then(obj => {
+            console.log(obj);
+            const {
+              cep,
+              logradouro,
+              complemento,
+              bairro,
+              localidade,
+              uf,
+              ibge
+            } = obj;
+
+            this.cep = cep;
+            this.endereco = logradouro;
+            this.complemento = complemento;
+            this.bairro = bairro;
+            this.cidade = localidade;
+            this.uf = uf;
+            this.IBGE = ibge;
+          });
+        }
+      }
+      return value;
     }
   },
   created() {
