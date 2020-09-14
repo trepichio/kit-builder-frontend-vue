@@ -776,7 +776,7 @@ export default {
       handler(values) {
         this.$store.dispatch("setSelectedAppVersion", {
           apps: { ...values },
-          kit: this.kit.name
+          kitName: this.kit.name
         });
         return values;
       },
@@ -786,7 +786,7 @@ export default {
       handler(values) {
         this.$store.dispatch("setSelectedApp", {
           apps: { ...values },
-          kit: this.kit.name
+          kitName: this.kit.name
         });
       },
       deep: true
