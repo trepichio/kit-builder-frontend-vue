@@ -1,6 +1,7 @@
 {
   "name": "vue-front-install-kit",
   "version": "0.1.0",
+  "description": "a VueJS frontend for MBD-Kit-builder",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -24,6 +25,7 @@
     "webrtc-ips": "^0.1.4"
   },
   "devDependencies": {
+    "@appnest/readme": "^1.2.7",
     "@vue/cli-plugin-babel": "^4.1.2",
     "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-plugin-pwa": "^4.1.2",
@@ -40,5 +42,20 @@
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-vuetify": "^2.0.3",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trepichio/kit-builder-frontend-vue.git"
+  },
+  "author": "João Trepichio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trepichio/kit-builder-frontend-vue/issues"
+  },
+  "homepage": "https://github.com/trepichio/kit-builder-frontend-vue#readme",
+  "contributors": [{
+    "name": "João Trepichio",
+    "img": "https://avatars2.githubusercontent.com/u/11396817?s=460&u=085712d4f1296e6ad0a220ae7c0ea5278a9c40ed&v=4",
+    "url": "https://trepichio.github.io"
+    }]
 }
