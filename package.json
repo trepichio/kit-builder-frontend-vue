@@ -20,7 +20,7 @@
     "vue-browser-detect-plugin": "^0.1.8",
     "vue-router": "^3.1.5",
     "vue-viacep": "^1.0.3",
-    "vuetify": "^2.2.8",
+    "vuetify": "^2.6.10",
     "vuex": "^3.1.2",
     "webrtc-ips": "^0.1.4"
   },
